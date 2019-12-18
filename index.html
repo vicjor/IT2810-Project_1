@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Interactive art</title>
+        <link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
+        <!-- Importing Google fonts -->
+        <link href='https://fonts.googleapis.com/css?family=Rock Salt' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <!-- Add SoMe icons to library -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+            <h1 id="myHeader">Ragnar Rock's Art Exhibtion</h1>
+
+        </header>
+        <div class="introduction">
+            <h2>
+                About the artist
+            </h2>
+            <p>Unless you have been living under a rock for the last year, you have probably heard of the up-and-coming Trondheim artist Ragnar Rock.
+                During 2018 Ragnar rose to fame for his now famously debut exhibition <i>Svev over og klikk på mæ</i>.
+                This site serves you a two of his most popular samples from said exhibtion.
+                The artist himself defines his art as interactive contemporary art, with inspiration from geometry.
+                If you like what you see here, you can follow Ragnar on social meda. Links can be found at the bottom of the page.
+            </p>
+
+        </div>
+            <div class="description-container">
+                <div class="SVG-description">
+                    <h2><i>Itj få anfall</i> - SVG</h2>
+                    <p>To interact with the image, try to mouseover and click on the different shapes to see what happens.
+                        See if you can find a way to cover the elliptic hole in the frame.
+                        Yes, you can interact will all shapes, except for the hole in the frame. Even the litte white dot.</p>
+
+                </div>
+                <div class="canvas-description">
+                    <h2><i>Klikk og bygg</i> - Canvas</h2>
+                    <p>Play around with the canvas by clicking and hovering the image. </p>
+                </div>
+            </div>
+            <div class="flex-container">
+                    <!-- The use of viewBox in the SVG-element is to make all children of SVG responsive and auto-scaling. -->
+                    <svg id="mySVG" viewBox="0 0 1100 800" >
+                        <!-- Defs and filter to create dropshadows and linear gradients.
+                        Filter id is referenced with e.g filter="url(#f1)" to apply to tags.-->
+                        <defs>
+                            <filter id="f1" x="0" y="0" width="200%" height="200%">
+                                <feOffset result"offOut" in"SourceGraphic" dx="40" dy="40" />
+                                <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                                <feBlend in="SourceGraphic" in2="offOut" mode="normal" />
+                            </filter>
+                            <filter id="f2" x="0" y="0" width="200%" height="200%">
+                                <feOffset result="offOut" in="SourceAlpha" dx="30" dy="30" />
+                                  <feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />
+                                  <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                            </filter>
+                            <!-- Src: https://www.w3schools.com/graphics/svg_grad_linear.asp -->
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+                              <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:rgb(255,0,255);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgb(0,255,0);stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:rgb(9,0,40);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgb(255,177,100);stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:rgb(255,255,255);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgb(0,0,255);stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:rgb(100,0,255);stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:rgb(0,255,0);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle
+                            id="bigCirc"
+                            cx="50"
+                            cy="400"
+                            r="10"
+                            stroke="url(f2)"
+                            stroke-width="2"
+                            fill="white"
+                        />
+                        <animateMotion
+                            id="myAnimation"
+                            href="#myRect"
+                            dur="3s"
+                            repeatCount="indefinite"
+                            fill="freeze"
+                            path="M 25,50 C 37.5,25 37.5,25 50,0 75,50 75,50 100,100 50,100 50,100 0,100 12.5,75 12.5,75 25,50 Z" />
+
+                        />
+                        <animate xlink:href="#bigCirc" />
+                        <rect
+                            id="myRect"
+                            x="50"
+                            y="550"
+                            width="200"
+                            height="150"
+                            stroke="blue"
+                            fill="url(#grad3)"
+                        />
+                        <rect
+                            id="mySquare"
+                            x="50"
+                            y="50"
+                            width="150"
+                            height="150"
+                            stroke="black"
+                            fill="url(#grad1)"
+                            filter=""
+                        />
+
+                        <ellipse
+                            id="blankEllipse"
+                            cx="800"
+                            cy="600"
+                            rx="200"
+                            ry="100"
+                            fill="#8c5656"
+                        />
+                        <ellipse
+                            id="myEllipse"
+                            cx="700"
+                            cy="350"
+                            rx="200"
+                            ry="100"
+                            fill="#909986"
+                            stroke="white"
+                        />
+                        <circle
+                            id="myCirc"
+                            cx="1000"
+                            cy="50"
+                            r="100"
+                            stroke="blue"
+                            stroke-width="2"
+                            fill="yellow"
+                            filter="url(#f2)"
+                        />
+                    </svg>
+
+
+                    <canvas id="myCanvas" >
+
+                    </canvas>
+            </div>
+            <div class="button-container">
+                <button id="myButton" type="button" name="button">Show documentation</button>
+            </div>
+            <div class="documentation-container">
+                <div class="documentation">
+                    <h3>CSS Flexbox</h3>
+                    <p>CSS Flexbox and Grid are both technologies design responsive layouts in a web page, without using float and positioning for every element. </p>
+
+                    <p>Having little to no experience on beforehand with CSS Flexbox/Grid, I had to do some research before deciding which one to use.
+                        I learned that Grid is for two-dimensional layouts and Flexbox is one-dimensional.
+                        For my project it seemed easier to just arrange elements in one direction, so I used Flexbox.
+                        Looking at code examples for both of them, Flexbox also seemed easier to use/learn.
+                        I played around, and with just a few lines of CSS i arranged my elements in the way I wanted.
+                        I decided to place my SVG and Canvas next to each other on a row with the same background styling, with a short description on top of each of them explaining how to interact with the images, and not making the layout to complicated.
+                    </p>
+                    <h3>SVG and Canvas</h3>
+                    <p>In this project it was a requirement to use both SVG and Canvas to create two different (or identical) interactive images.
+                        SVG and Canvas is two different technologies with the same purpose - to create graphics on a web page.
+                        The two of them creates graphic in different ways.
+                        Canvas uses Javascript to make drawings, and you have to define several points to create a shape.
+                        SVG uses a XML structure, so every element is available in the SVG document object model (DOM).
+                        With SVG you can easily add JavaScript event handlers to each object, which is not available with canvas for each drawn object.</p>
+                    <p>
+                        Having no experience with either of them, I started playing with SVG.
+                        I used W3Schools documentation to create some simple figures like circles, rectangles, ellipses and so on.
+                        Next I tried to play with the different attributes of the HTML elements to change colors, sizes and placement.
+                        When I understood how to use SVG, I tried to add a few JavaScript functions to handle clicks and mouseovers.
+                        I started out simple with changing the colors and the size of the elements.
+                        I then decided to create a pool of five different gradient colors, and to change the color randomly to one of these five on events. </p>
+                    <p>
+                        After I had basic elements in my SVG image I made a few more complex functions.
+                        I found CSS online to make the circle spin across the screen, and in addition to changing color on mouseover, I sped up the animation.
+                        I also found code online to add drop shadow to the different shapes.
+                        With my rectangle I added two event handlers, one for clicking and one for mouseover.
+                        On mouseover the rectangle will expand, and on click it will change color and return to its initial size.
+                    </p>
+                    <p>
+                        To make sure I had enough variation between my SVG-elements, I made two ellipses.
+                        One static one, and another one that blends in with the background, with a stroke around to make it visible.
+                        On mouseover, the ellipse will change its location randomly to one of 25 different locations (5*5).
+                        One of these locations will make the ellipse cover the static one, blending it into the background of the SVG.
+                    </p>
+                    <p>
+                        After I felt somewhat finished with my SVG image I started researching Canvas.
+                        It did not take long till I realized creating the same picture in Canvas would require a lot more effort than it did with SVG.
+                        Creating a simple square in Canvas required several lines of JavaScript, defining point to point.
+                        After I started to get the hang of the drawing properties with Canvas I tried adding some functionality.
+                        It turned out to be a difficult task to define click events on the square that I had made rather than on the Canvas itself.
+                        Apparently canvas does not support event handlers.
+                        Therefore I decided to create a different kind of image with the Canvas, with simpler functionality.
+                        On each click on the canvas, a triangle will be added to one of the sides.
+                        After four triangles is added, the next click will reset the drawing to the initial square.
+                        I concluded that if I were to recreate the same image I made with SVG, I would have to write a lot more JavaScript code, and the project would become much more time consuming than the estimated 20 hours.
+                    </p>
+                    <h3>jQuery</h3>
+                    <p>
+                        jQuery is a JavaScript library with the intention of simplifying HTML scripting.
+                        With jQuery, just like Flexbox, Canvas and SVG, I had no previous experience.
+                        Experience with JavaScript helped me learn jQuery faster.
+                        After a short tutorial on scrimba.com I quickly discovered the power using jQuery.
+                        All id’s, classes, variables and elements are easy to access and modify attributes of.
+                        This makes it incredibly simple to add functionality in response to events with the HTML-elements.
+                    </p>
+                    <p>
+                        I wrote several functions for event handling in JavaScript, and made calls to them with click/mouseover using jQuery.
+                        Some of the events were one-liners, like changing size of a rectangle, and in those cases I used plain jQuery without use of self-defined functions.
+                        jQuery also made it easy to show/hide documentation on click.
+                    </p>
+                    <h3>Testing</h3>
+                    <p>
+                        Cross-browser testing is important in web development as browsers might implement different technologies, and may have different behaviour as a consequence.
+                        A consequence might be that the web page renders different in different browsers.
+                        I tested my web page in Google Chrome Version 76.0.3809.100 and in Opera Version:63.0.3368.53.
+                        All the text had the same formatting and interactions with SVG objects and the Canvas element also had the same behaviour.
+                        My web page were also responsive to change in window size in both browsers.
+                    </p>
+                    <h3>Sources for learning</h3>
+                    <p>
+                        I had experience with HTML, CSS and JavaScript before starting this project, and had the advantage that I knew were to look for good documentation for the parts I did not know.
+                        W3Schools have been the biggest source for information, but Scrimba had nice tutorials introducing me to jQuery and Css Flexbox.
+                        When trying to solve minor issues I frequently visited StackOverflow.
+                        <ul>
+                            <li>https://www.w3schools.com/graphics/svg_intro.asp</li>
+                            <li>https://scrimba.com/g/gflexbox</li>
+                            <li>https://scrimba.com/playlist/p9dquG</li>
+                            <li>https://www.w3schools.com/html/html5_canvas.asp</li>
+                        </ul>
+                    </p>
+                    <h3>Sources for code</h3>
+                    <p>Though also referenced in comments of the code, this is the sources I have used for code snippets.
+                        <ul>
+                            <li>https://davidwalsh.name/css-circles</li>
+                            <li>https://www.bestcssbuttongenerator.com/#/34</li>
+                            <li>https://www.w3schools.com/howto/howto_css_social_media_buttons.asp</li>
+                            <li>https://www.w3schools.com/graphics/svg_grad_linear.asp</li>
+                            <li>https://css-tricks.com/guide-svg-animations-smil/</li>
+
+                        </ul>
+                     </p>
+                </div>
+            </div>
+
+        <footer>
+
+                <div class="footer-container">
+                    <div class="footer-column">
+                        <a href="#" class="fa fa-snapchat-ghost"></a>
+                    </div>
+                    <div class="footer-column">
+                        <a href="#" class="fa fa-facebook"></a>
+                    </div>
+                    <div class="footer-column">
+                        <a href="#" class="fa fa-instagram"></a>
+                </div>
+        </footer>
+    </body>
+</html>
